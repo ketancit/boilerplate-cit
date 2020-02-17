@@ -54,14 +54,18 @@ class Cit_BoilerPlate {
 		$path = dirname(__FILE__).'/../admin/templates/fields/';
 		$files = array_diff(scandir($path), array('.', '..'));
 
-		include dirname(__FILE__).'/lib/stoutlogic/acf-builder/autoload.php';
+		$autoloadFile = dirname(__FILE__).'/lib/stoutlogic/acf-builder/autoload.php';
 
-		if (!empty($files)) {
-			foreach ($files as $file) {
-				if (substr_compare($file, '.php', -strlen('.php')) === 0) {
-					$field = require_once($path.$file);	
-					if ($field instanceof FieldsBuilder) {
-					    acf_add_local_field_group($field->build());
+		if (file_exists($autoloadFile)) {
+			include $autoloadFile;
+
+			if (!empty($files)) {
+				foreach ($files as $file) {
+					if (substr_compare($file, '.php', -strlen('.php')) === 0) {
+						$field = require_once($path.$file);	
+						if ($field instanceof FieldsBuilder) {
+						    acf_add_local_field_group($field->build());
+						}
 					}
 				}
 			}
