@@ -14,7 +14,8 @@
     "require": {
         "php": ">=7.1",
         "composer/installers": "~1.0",
-        "fxp/composer-asset-plugin": "*"
+        "fxp/composer-asset-plugin": "*",
+        "stoutlogic/acf-builder" : "*"
     },
     "license": "mit",
     "authors": [
