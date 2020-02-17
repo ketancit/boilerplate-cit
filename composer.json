@@ -9,7 +9,7 @@
     }
   ],
     "config": {
-        "vendor-dir": "/vendors"
+        "vendor-dir": "/includes/lib"
     },
     "require": {
         "php": ">=7.1",
