@@ -54,7 +54,7 @@ class Cit_BoilerPlate {
 		$path = dirname(__FILE__).'/../admin/templates/fields/';
 		$files = array_diff(scandir($path), array('.', '..'));
 
-		$autoloadFile = dirname(__FILE__).'/lib/stoutlogic/acf-builder/autoload.php';
+		$autoloadFile = dirname(__FILE__).'/vendors/stoutlogic/acf-builder/autoload.php';
 
 		if (file_exists($autoloadFile)) {
 			include $autoloadFile;
