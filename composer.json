@@ -9,7 +9,7 @@
     }
   ],
     "config": {
-        "vendor-dir": "../../path/to/vendors"
+        "vendor-dir": "/vendors"
     },
     "require": {
         "php": ">=7.1",
