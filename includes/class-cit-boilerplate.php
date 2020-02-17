@@ -2,6 +2,8 @@
 
 namespace CitBoilerplate;
 
+use StoutLogic\AcfBuilder\FieldsBuilder;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -39,8 +41,31 @@ class Cit_BoilerPlate {
 		//all constants file
 		include dirname(__FILE__).'/constants.php';
 
+		//including acf plugin
+		include dirname(__FILE__).'/lib/acf/acf.php';
+
 		//all miscellaneous functions file
 		include dirname(__FILE__).'/functions.php';
+
+		// Define path and URL to the ACF plugin.
+		define('MY_ACF_PATH', dirname(__FILE__) . '/lib/acf/');
+		define('MY_ACF_URL', plugins_url('/lib/acf/', __FILE__));
+
+		$path = dirname(__FILE__).'/../admin/templates/fields/';
+		$files = array_diff(scandir($path), array('.', '..'));
+
+		include dirname(__FILE__).'/lib/stoutlogic/acf-builder/autoload.php';
+
+		if (!empty($files)) {
+			foreach ($files as $file) {
+				if (substr_compare($file, '.php', -strlen('.php')) === 0) {
+					$field = require_once($path.$file);	
+					if ($field instanceof FieldsBuilder) {
+					    acf_add_local_field_group($field->build());
+					}
+				}
+			}
+		}
 
 		//activation and deactivation classes
 		include dirname(__FILE__).'/class-cit-boilerplate-activate.php';
